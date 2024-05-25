@@ -1,5 +1,5 @@
 OriginalSongs/*
 StandardSongs/*
-*/*.zip
-*/*.gz
-*/*.bz2
+**/*.zip
+**/*.gz
+**/*.bz2
