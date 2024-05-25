@@ -5,7 +5,7 @@
 for filename in StandardSongs/*.wav; do
     base_name=$(basename "$filename" .wav)
     echo "$base_name"
-    ./GetMaxFreqs/bin/GetMaxFreqs -v -w Database/Freqs/"$base_name".freqs "$filename"
+    ./GetMaxFreqs/bin/GetMaxFreqs -v -w database/freqs/"$base_name".freqs "$filename"
 done
 
 #Compress freqs files
