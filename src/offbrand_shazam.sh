@@ -40,6 +40,7 @@ for file in database/freqs/*.freqs; do
     # echo "Database bits - $database_bits"
     # echo " "
 
+    #TODO: Append two freq files, compress with chosen method, get bits, remove file, calculate ncd, add to associative array with name of database song and ncd score, show top 5 scores.
 
 done
 
