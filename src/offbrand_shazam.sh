@@ -22,15 +22,22 @@ done
 echo "Freq file: $freqs";
 echo "Compression method: $compression_method";
 
+test_base_name=$(basename "$freqs" .freqs)
+
 for file in database/freqs/*.freqs; do
-    base_name=$(basename "$file" .freqs)
-    line=$(grep -F "$base_name" database/bitsNeeded/"$compression_method".json )
+    database_base_name=$(basename "$file" .freqs)
+    line=$(grep -F "$database_base_name" database/bitsNeeded/"$compression_method".json )
     line1="${line##*: }"
     database_bits="${line1%,*}"
+
+
+    line=$(grep -F "$test_base_name" Samples/bitsNeeded/"$compression_method".json )
+    line1="${line##*: }"
+    test_bits="${line1%,*}"
     # echo " "
-    # echo "$base_name"
-    # echo "$line"
-    # echo "$database_bits"
+    # echo "$database_base_name"
+    # echo "Test bits - $test_bits"
+    # echo "Database bits - $database_bits"
     # echo " "
 
 
