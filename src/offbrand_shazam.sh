@@ -17,11 +17,12 @@ rm -f temp.zip
 rm -f temp.txt.gz
 rm -f temp.txt.bz2
 
-while getopts f:c: flag
+while getopts f:c:n: flag
 do
     case "${flag}" in
         f) freqs=${OPTARG};;
         c) compression_method=${OPTARG};;
+        n) number_results=${OPTARG};;
     esac
 done
 
@@ -86,10 +87,11 @@ for file in database/freqs/*.freqs; do
     # echo "NCD - $ncd_result"
     # echo " "
 
-    #TODO: show top 5 scores.
-
 done
 
-for key in "${!results[@]}"; do
-        printf '%s\0%s\0' "$key" "${results[$key]}"
-done
+for k in "${!results[@]}"
+do
+    echo $k ' - ' ${results["$k"]}
+done |
+sort -n -k3 |
+head -$number_results
