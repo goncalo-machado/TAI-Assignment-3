@@ -7,7 +7,7 @@ ncd () {
     local min=$((cx > cy ? cy : cx))
     local max=$((cx > cy ? cx : cy))
     local top=$((cxy - min))
-    local result=$(bc <<< "scale=2;$top / $max")
+    local result=$(bc <<< "scale=20;$top / $max")
     echo "$result"
 }
 
@@ -30,6 +30,8 @@ echo "Compression method: $compression_method";
 
 test_base_name=$(basename "$freqs" .freqs)
 
+declare -A results
+
 for file in database/freqs/*.freqs; do
 
     #Bits needed to compress database freq file
@@ -47,7 +49,7 @@ for file in database/freqs/*.freqs; do
 
     #Append the two files
 
-    cat database/freqs/"$database_base_name".freqs $freqs >> temp.txt
+    cat database/freqs/"$database_base_name".freqs $freqs >> temp.txt 
 
     case $compression_method in
         "zip") 
@@ -71,17 +73,23 @@ for file in database/freqs/*.freqs; do
     rm -f temp.txt
 
     together_bits=$(($bits*8))
+
+    ncd_result="$(ncd $together_bits $database_bits $test_bits)"
+
+    results[$database_base_name]=$ncd_result
+
     # echo " "
     # echo "$database_base_name"
     # echo "Test bits - $test_bits"
     # echo "Database bits - $database_bits"
     # echo "Together bits - $together_bits"
+    # echo "NCD - $ncd_result"
     # echo " "
 
-    exit
-    #TODO: calculate ncd, add to associative array with name of database song and ncd score, show top 5 scores.
+    #TODO: show top 5 scores.
 
 done
 
-# temp="$(ncd 4 3 2)"
-# echo $temp
+for key in "${!results[@]}"; do
+        printf '%s\0%s\0' "$key" "${results[$key]}"
+done
