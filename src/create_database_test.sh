@@ -2,16 +2,16 @@
 
 #Get Freqs files
 
-for filename in Samples/*.wav; do
+for filename in TestSamples/*.wav; do
     base_name=$(basename "$filename" .wav)
     echo "$base_name"
-    ./GetMaxFreqs/bin/GetMaxFreqs -v -w Samples/freqs/"$base_name".freqs "$filename"
+    ./GetMaxFreqs/bin/GetMaxFreqs -v -w Samples/freqs/"$base_name".txt "$filename"
 done
 
 #Compress freqs files
 
-for freqs_file in Samples/freqs/*.freqs; do
-    base_name=$(basename "$freqs_file" .freqs)
+for freqs_file in Samples/freqs/*.txt; do
+    base_name=$(basename "$freqs_file" .txt)
     echo "$base_name"
     
     echo "Compressing with zip"

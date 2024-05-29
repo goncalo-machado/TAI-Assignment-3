@@ -29,15 +29,15 @@ done
 echo "Freq file: $freqs";
 echo "Compression method: $compression_method";
 
-test_base_name=$(basename "$freqs" .freqs)
+test_base_name=$(basename "$freqs" .txt)
 
 declare -A results
 
-for file in database/freqs/*.freqs; do
+for file in database/freqs/*.txt; do
 
     #Bits needed to compress database freq file
 
-    database_base_name=$(basename "$file" .freqs)
+    database_base_name=$(basename "$file" .txt)
     line=$(grep -F "$database_base_name" database/bitsNeeded/"$compression_method".json )
     line1="${line##*: }"
     database_bits="${line1%,*}"
@@ -48,9 +48,12 @@ for file in database/freqs/*.freqs; do
     line1="${line##*: }"
     test_bits="${line1%,*}"
 
+    # echo "TEST BASE NAME - $test_base_name"
+    # echo "LINE - $line"
+
     #Append the two files
 
-    cat database/freqs/"$database_base_name".freqs $freqs >> temp.txt 
+    cat database/freqs/"$database_base_name".txt $freqs >> temp.txt 
 
     case $compression_method in
         "zip") 
