@@ -1,4 +1,5 @@
 #!/bin/bash
+
 ls StandardSongs |sort -R |tail -20 |while read file; do
     echo "$file"
     base_name=$(basename "$file" .wav)
@@ -15,5 +16,5 @@ ls StandardSongs |sort -R |tail -20 |while read file; do
 
     echo "Interval for sample: [$start_timestamp,$end_timestamp]"
 
-    sox StandardSongs/"$file" TestSamples/Original/"$base_name"-Interval-"$start_timestamp"_"$end_timestamp".wav trim "$start_timestamp" "$end_timestamp"
+    sox StandardSongs/"$file" TestSamples/Original/"$base_name"-Interval-"$start_timestamp"_"$end_timestamp".wav trim "$start_timestamp" 20
 done
