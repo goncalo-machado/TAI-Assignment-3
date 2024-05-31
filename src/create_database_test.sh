@@ -2,7 +2,7 @@
 
 #Get Freqs files
 
-for filename in TestSamples/*.wav; do
+for filename in TestSamples/*/*.wav; do
     base_name=$(basename "$filename" .wav)
     echo "$base_name"
     ./GetMaxFreqs/bin/GetMaxFreqs -v -w Samples/freqs/"$base_name".txt "$filename"
