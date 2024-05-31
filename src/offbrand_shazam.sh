@@ -57,7 +57,7 @@ for file in database/freqs/*.txt; do
 
     case $compression_method in
         "zip") 
-            zip -j -r temp.zip temp.txt 
+            zip -j -q -r temp.zip temp.txt 
             bits=$(stat -c%s temp.zip)
             rm -f temp.zip
             ;;
