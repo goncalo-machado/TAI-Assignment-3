@@ -15,7 +15,7 @@ for freqs_file in database/freqs/*.txt; do
     echo "$base_name"
     
     echo "Compressing with zip"
-    zip -j -r database/zip/"$base_name".zip "$freqs_file"
+    zip -j -q -r database/zip/"$base_name".zip "$freqs_file"
     
     echo "Compressing with gzip"
     gzip -k "$freqs_file"
