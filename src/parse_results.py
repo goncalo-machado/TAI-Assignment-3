@@ -20,8 +20,6 @@ with open("results/results.txt", encoding="utf-8") as file:
             compression_method = line.removeprefix("Compression method: ").strip()
             result_dic["Compression"] = compression_method
         elif line.isspace():
-            if freq_file == "AJR_-_Adventure_Is_Out_There_(Official_Audio)-Interval-105_125_Noise_0.16.txt":
-                print(result_dic)
             results.append(result_dic)
             result_dic = {}
         else:
@@ -30,7 +28,5 @@ with open("results/results.txt", encoding="utf-8") as file:
                 result_dic["Top"] = {}
             result_dic["Top"][arr[0].strip()] = float(arr[1].strip())
         
-
-
 with open('results/parsed_result.json', 'w', encoding="utf-8") as f:
-    json.dump(results,f, sort_keys=True, indent=4, ensure_ascii=False)
+    json.dump(results,f, sort_keys=False, indent=4, ensure_ascii=False)
