@@ -24,14 +24,22 @@ for freqs_file in database/freqs/*.txt; do
     echo "Compressing with bzip2"
     bzip2 -k "$freqs_file"
     mv "$freqs_file".bz2 database/bzip2/"$base_name".bz2
+
+    echo "Compressing with lzma"
+    lzma -z -k -q "$freqs_file"
+    mv "$freqs_file".lzma database/lzma/"$base_name".lzma
+
+    echo "Compressing with zstd"
+    zstd -q "$freqs_file"
+    mv "$freqs_file".zst database/zstd/"$base_name".zst
 done
 
 #Create files with bits needed for every type of compressed files
 
-compression_methods=('zip' 'gzip' 'bzip2' )
-extensions=('zip' 'gz' 'bz2')
+compression_methods=('zip' 'gzip' 'bzip2' 'lzma' 'zstd')
+extensions=('zip' 'gz' 'bz2' 'lzma' 'zst')
 
-for i in {0..2}; do
+for i in {0..4}; do
     echo ${compression_methods[$i]}
     unset bits_needed
     declare -A bits_needed

@@ -2,7 +2,7 @@
 
 # Delete songs
 
-find StandardSongs/*/*.wav -type f -print0 | xargs -0 rm
+find StandardSongs/*.wav -type f -print0 | xargs -0 rm
 find TestSamples/*/*.wav -type f -print0 | xargs -0 rm
 
 # Delete Databases
@@ -12,6 +12,8 @@ find */bzip2/*.bz2 -type f -print0 | xargs -0 rm
 find */freqs/*.txt -type f -print0 | xargs -0 rm
 find */gzip/*.gz -type f -print0 | xargs -0 rm
 find */zip/*.zip -type f -print0 | xargs -0 rm
+find */lzma/*.lzma -type f -print0 | xargs -0 rm
+find */zstd/*.zst -type f -print0 | xargs -0 rm
 
 #Delete Results
 

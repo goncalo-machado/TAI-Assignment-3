@@ -16,6 +16,8 @@ rm -f temp.txt
 rm -f temp.zip
 rm -f temp.txt.gz
 rm -f temp.txt.bz2
+rm -f temp.txt.lzma
+rm -f temp.txt.zst
 
 while getopts f:c:n: flag
 do
@@ -69,6 +71,14 @@ for file in database/freqs/*.txt; do
             gzip -k temp.txt
             bits=$(stat -c%s temp.txt.gz)
             rm -f temp.txt.gz;;
+        "lzma")
+            lzma -z -k -q temp.txt
+            bits=$(stat -c%s temp.txt.lzma)
+            rm -f temp.txt.lzma;;
+        "zstd")
+            zstd -q temp.txt
+            bits=$(stat -c%s temp.txt.zst)
+            rm -f temp.txt.zst;;
         *) 
             echo "Invalid compression Method"
             exit 1 ;;
