@@ -27,6 +27,14 @@ with open("results/results.txt", encoding="utf-8") as file:
             if "Top" not in result_dic.keys():
                 result_dic["Top"] = {}
             result_dic["Top"][arr[0].strip()] = float(arr[1].strip())
+
+for dict in results:
+    counter = 1
+    for line in dict["Top"]:
+        if line == dict["BaseFile"]:
+            break
+        counter += 1
+    dict["CorrectGuessPlace"] = counter
         
 with open('results/parsed_result.json', 'w', encoding="utf-8") as f:
     json.dump(results,f, sort_keys=False, indent=4, ensure_ascii=False)
